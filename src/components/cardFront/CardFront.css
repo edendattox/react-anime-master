@@ -1,0 +1,11 @@
+.cardFront {
+  height: 300px;
+  width: 190px;
+  margin-top: 30px;
+}
+
+h4 {
+  color: white;
+  font-size: 14px;
+  font-weight: 350;
+}

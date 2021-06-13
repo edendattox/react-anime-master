@@ -1,0 +1,15 @@
+.browse {
+  margin-top: 10px;
+  padding: 0 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+h3 {
+  color: white;
+}
+
+.browse__filter {
+  display: flex;
+  flex-direction: column;
+}

@@ -1,0 +1,33 @@
+.anime {
+  /* display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr; */
+
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  margin-left: 50px;
+  margin-top: 30px;
+  grid-gap: 50px;
+}
+
+.para-r {
+  color: rgba(253, 232, 232, 0.5);
+  font-size: 1rem;
+  font-weight: bold;
+  margin-left: 50px;
+  position: relative;
+  top: 35px;
+}
+
+/* .a-l_anime {
+  /* background-color: #fff;
+  width: 20px;
+  height: 20px;
+  margin-right: 20px;
+  margin-top: 20px; */
+
+/* background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  font-size: 30px;
+  text-align: center; */
+/* } */

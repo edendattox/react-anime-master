@@ -1,0 +1,12 @@
+.cover {
+  height: 400px;
+  background-color: red;
+  width: 100%;
+  left: 10;
+  right: 10;
+}
+
+.bg {
+  height: 400px;
+  width: 100%;
+}

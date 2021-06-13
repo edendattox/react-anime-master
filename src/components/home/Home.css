@@ -1,0 +1,147 @@
+.heroContainer {
+  margin-top: 30px;
+  padding: 0 10px;
+}
+
+.home__title {
+  margin-top: 20px;
+}
+
+.home__title__two {
+  margin-top: 40px;
+}
+
+h3 {
+  color: white;
+  font-size: 18px;
+  font-weight: 450;
+}
+
+.home__anime {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.middle__container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 100px;
+}
+
+.donate {
+  max-width: 80%;
+  margin-bottom: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.donate > h3 {
+  color: #b6b6b6;
+  font-size: 1.2em;
+  font-weight: 400px;
+}
+
+.donate__button {
+  display: flex;
+  justify-content: flex-end;
+  width: 84.5%;
+  margin-bottom: 30px;
+  cursor: pointer;
+}
+
+.donate__button__text {
+  display: flex;
+  margin: auto;
+  flex: 0.6;
+}
+
+.donate__button__text > h3 {
+  color: #b6b6b6;
+  font-size: 1.2em;
+  font-weight: 400px;
+  margin-right: auto;
+  margin-top: 10px;
+}
+
+.donate__button > .button {
+  border: 0.2px solid #b6b6b6;
+  color: #b6b6b6;
+  padding: 10px 40px;
+}
+
+.donate__button > .button:hover {
+  background-color: #221f1f;
+}
+
+.bar {
+  width: 70%;
+  display: flex;
+  justify-content: flex-start;
+  height: 2px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #b6b6b6;
+  margin-bottom: 40px;
+}
+
+.bar > .bar__bar {
+  width: 80%;
+  flex: 1;
+  background-color: #f4615a !important;
+}
+
+.bar__text {
+  display: flex;
+}
+
+.bar__text > h3 {
+  margin-top: 20px;
+  display: flex;
+  background-color: #b6b6b6;
+  width: 100%;
+  justify-content: flex-end;
+}
+
+.footer {
+  display: flex;
+}
+
+@media (max-width: 1500px) {
+  .donate > h3 {
+    display: none;
+  }
+
+  .middle__container {
+    display: flex;
+    width: 100%;
+  }
+
+  .donate__button {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 0 auto;
+    position: relative;
+    top: -20px;
+  }
+
+  .donate__button > .button {
+    margin-top: 20px;
+  }
+
+  .bar {
+    width: 84%;
+  }
+
+  .footer {
+    margin-top: 10px;
+  }
+}
+
+@media (min-width: 1500px) {
+  .header__burger {
+    display: none;
+  }
+}

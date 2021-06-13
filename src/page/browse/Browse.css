@@ -1,0 +1,9 @@
+.Browse {
+  object-fit: contain;
+}
+
+.browse__anime {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
