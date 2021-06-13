@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import SearchCard from "../../components/cardFront/CardFront";
 import "./SearchResult.css";
 import { useSelector, useDispatch } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { idAnime } from "../../redux/actions/animeAction";
 import {
   // removeSelectedAnime,
@@ -53,7 +53,6 @@ const SearchResult = () => {
               key={mal_id}
               title={title}
               img={image_url}
-              onClick={() => dispatch(idAnime(mal_id))}
             />
           </div>
         </Link>

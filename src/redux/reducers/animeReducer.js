@@ -22,8 +22,8 @@ export const animeReducer = (state = initialState, { type, payload }) => {
       return { ...state, idAnime: payload };
     case ActionTypes.SELECTED_ANIME:
       return { ...state, anime: payload };
-    // case ActionTypes.REMOVE_SELECTED_ANIME:
-    //   return { ...state, animes: {} };
+    case ActionTypes.REMOVE_SELECTED_ANIME:
+      return { ...state, anime: {} };
     default:
       return state;
   }

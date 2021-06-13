@@ -6,7 +6,7 @@ import queryString from "query-string";
 import "./animeDetails.css";
 import {
   fetchAnimes,
-  // removeSelectedAnime,
+  removeSelectedAnime,
 } from "../../redux/actions/animeAction";
 
 const AnimeDetails = () => {
@@ -14,7 +14,7 @@ const AnimeDetails = () => {
   const dispatch = useDispatch();
   const animeDetail = useSelector((state) => state.allAnime.anime.results[0]);
   const [query, setQuery] = useState("");
-  const [id, setId] = useState(1735);
+  const [id, setId] = useState();
   const { image_url, title, synopsis, mal_id, type, score, episodes, rated } =
     animeDetail;
 
@@ -25,17 +25,13 @@ const AnimeDetails = () => {
   let name = getParameters("title");
   let aid = getParameters("id");
 
-  const handleQuery = () => {
-    setQuery(name);
-  };
-
   useEffect(() => {
     setQuery(name);
     setId(aid);
     dispatch(fetchAnimes(query, id));
-    // return () => {
-    //   // dispatch(removeSelectedAnime());
-    // };
+    return () => {
+      // dispatch(removeSelectedAnime());
+    };
   }, [query]);
   return (
     <div>

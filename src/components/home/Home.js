@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 import "./Home.css";
 import CardFront from "../cardFront/CardFront";
-
 import { AnimeAiringContext } from "../../context/AiringContext";
 import { AnimePopularContext } from "../../context/Popular";
 import Footer from "../footer/Footer";
+import { Link } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 
 function Home() {
@@ -19,13 +19,17 @@ function Home() {
 
       <div className="home__anime">
         {airing.map((anime) => (
-          <CardFront
-            className="cardFront__style"
-            key={anime.mal_id}
-            title={anime.title}
-            img={anime.image_url}
-            episode={anime.episodes}
-          />
+          <div key={anime.mal_id}>
+            <Link to={"/airing?title=" + `${anime.title}&id=${anime.mal_id}`}>
+              <CardFront
+                className="cardFront__style"
+                key={anime.mal_id}
+                title={anime.title}
+                img={anime.image_url}
+                episode={anime.episodes}
+              />
+            </Link>
+          </div>
         ))}
       </div>
 
@@ -35,13 +39,17 @@ function Home() {
 
       <div className="home__anime">
         {popular.map((anime) => (
-          <CardFront
-            className="cardFront__style"
-            key={anime.mal_id}
-            title={anime.title}
-            img={anime.image_url}
-            episode={anime.episodes}
-          />
+          <div key={anime.mal_id}>
+            <Link to={"/popular?title=" + `${anime.title}&id=${anime.mal_id}`}>
+              <CardFront
+                className="cardFront__style"
+                key={anime.mal_id}
+                title={anime.title}
+                img={anime.image_url}
+                episode={anime.episodes}
+              />
+            </Link>
+          </div>
         ))}
 
         <div className="middle__container">

@@ -1,9 +1,14 @@
-.Browse {
-  object-fit: contain;
+.b-r__anime {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr !important;
+  margin-left: 20px;
 }
 
-.browse__anime {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+.b-para-r {
+  color: rgba(253, 232, 232, 0.5);
+  font-size: 1rem;
+  font-weight: bold;
+  margin-left: 20px;
+  position: relative;
+  top: 20px;
 }

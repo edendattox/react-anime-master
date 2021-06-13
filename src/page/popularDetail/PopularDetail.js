@@ -1,32 +1,37 @@
 import React, { useState, useEffect } from "react";
 import DetailsCard from "../../components/detailCard/DetailsCard";
 import { useDispatch, useSelector } from "react-redux";
-import "./random.css";
-import { fetchAnimes } from "../../redux/actions/animeAction";
+import "./PopularDetail.css";
+import {
+  fetchAnimes,
+  removeSelectedAnime,
+} from "../../redux/actions/animeAction";
 
 const AnimeDetails = () => {
+  // const animeName = useSelector((state) => state.allAnime.animeName);
   const dispatch = useDispatch();
   const animeDetail = useSelector((state) => state.allAnime.anime.results[0]);
-  const [query, setQuery] = useState("k");
+  const [query, setQuery] = useState("");
   const [id, setId] = useState();
   const { image_url, title, synopsis, mal_id, type, score, episodes, rated } =
     animeDetail;
 
-  const random = () => {
-    let num = Math.floor(Math.random() * 100);
-    return num;
+  const getParameters = (n) => {
+    let params = new URLSearchParams(window.location.search);
+    return params.get(n);
   };
+  let name = getParameters("title");
+  let aid = getParameters("id");
 
-  // console.log(query);
-  // console.log(id);
+  console.log(title);
 
   useEffect(() => {
-    // setQuery(name);
-    setId(random());
+    setQuery(name);
+    setId(aid);
     dispatch(fetchAnimes(query, id));
-    // return () => {
-    //   // dispatch(removeSelectedAnime());
-    // };
+    return () => {
+      // dispatch(removeSelectedAnime());
+    };
   }, [query]);
   return (
     <div>
