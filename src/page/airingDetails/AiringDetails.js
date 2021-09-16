@@ -10,11 +10,9 @@ import {
 const AnimeDetails = () => {
   // const animeName = useSelector((state) => state.allAnime.animeName);
   const dispatch = useDispatch();
-  const animeDetail = useSelector((state) => state.allAnime.anime.results[0]);
   const [query, setQuery] = useState("");
   const [id, setId] = useState();
-  const { image_url, title, synopsis, mal_id, type, score, episodes, rated } =
-    animeDetail;
+  const animeDetail = useSelector((state) => state.allAnime.anime.results[0]);
 
   const getParameters = (n) => {
     let params = new URLSearchParams(window.location.search);
@@ -23,14 +21,23 @@ const AnimeDetails = () => {
   let name = getParameters("title");
   let aid = getParameters("id");
 
+  console.log("query:", query, "Id:", id);
+
   useEffect(() => {
     setQuery(name);
+
     setId(aid);
+
     dispatch(fetchAnimes(query, id));
+
     return () => {
-      // dispatch(removeSelectedAnime());
+      dispatch(removeSelectedAnime(animeDetail));
     };
-  }, [query]);
+  }, [query, id, name, aid, dispatch, animeDetail]);
+
+  const { image_url, title, synopsis, mal_id, type, score, episodes, rated } =
+    animeDetail;
+
   return (
     <div>
       <div className="a-container">

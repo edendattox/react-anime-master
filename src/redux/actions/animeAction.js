@@ -1,9 +1,8 @@
 import axios from "axios";
 import { ActionTypes } from "../contants/action-types";
 
-export const fetchAnime =
-  (query, currentPage, postsPerPage) => async (dispatch) => {
-    // console.log(query);
+export function fetchAnime(query, currentPage, postsPerPage) {
+  return async (dispatch) => {
     const response = await axios.get(
       `https://api.jikan.moe/v3/search/anime?q=${query}&order_by=title&sort=asc&limit=${postsPerPage}&page=${currentPage}`
     );
@@ -11,24 +10,23 @@ export const fetchAnime =
       type: ActionTypes.FETCH_ANIME,
       payload: response.data,
     });
-    // console.log(response);
   };
+}
 
-export const fetchAnimes = (query, id) => async (dispatch) => {
-  console.log(query);
-  const response = await axios.get(
-    `https://api.jikan.moe/v3/search/anime?q=${query}&mal_id=${id}&limit=1`
-  );
-  dispatch({
-    type: ActionTypes.SELECTED_ANIME,
-    payload: response.data,
-  });
-  // console.log(response);
-};
+export function fetchAnimes(query, id) {
+  return async (dispatch) => {
+    console.log(query);
+    const response = await axios.get(
+      `https://api.jikan.moe/v3/search/anime?q=${query}&mal_id=${id}&limit=1`
+    );
+    dispatch({
+      type: ActionTypes.SELECTED_ANIME,
+      payload: response.data,
+    });
+  };
+}
 
 export const setAnime = (anime) => {
-  // console.log(anime);
-
   return {
     type: ActionTypes.SET_ANIME,
     payload: anime,
