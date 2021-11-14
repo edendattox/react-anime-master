@@ -1,36 +1,43 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import SearchCard from "../../components/cardFront/CardFront";
 import "./SearchResult.css";
-import { useSelector, useDispatch } from "react-redux";
+// import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { idAnime } from "../../redux/actions/animeAction";
-import {
-  removeSelectedAnime,
-  fetchAnime,
-  animeDetailName,
-} from "../../redux/actions/animeAction";
+// import { idAnime } from "../../redux/actions/animeAction";
+// import {
+//   animeDetailName,
+//   fetchAnimes,
+//   fetchAnime,
+// } from "../../redux/actions/animeAction";
 
 const SearchResult = () => {
-  const dispatch = useDispatch();
   const [query, setQuery] = useState("");
-  const animeName = useSelector((state) => state?.allAnime?.animeName);
-  const animes = useSelector((state) => state?.allAnime?.animes?.results);
+  const [anime, setAnime] = useState([]);
+
+  const getParameters = (n) => {
+    let params = new URLSearchParams(window.location.search);
+    return params.get(n);
+  };
+  let name = getParameters("q");
+
+  console.log(name);
 
   useEffect(() => {
-    !query && setQuery(animeName);
-    !query.length ? dispatch(fetchAnime(query)) : console.error("not query");
-    query && dispatch(animeDetailName(query));
-    // return () => {
-    //   dispatch(removeSelectedAnime(query));
-    // };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [query, animeName, animes]);
-
-  console.log(animes);
+    setQuery(name);
+    const detail = async () => {
+      const response = await axios.get(
+        `https://api.jikan.moe/v3/search/anime?q=${query}&order_by=title&sort=asc&limit=${20}&page=${1}`
+      );
+      const results = response.data.results[0];
+      setAnime(results);
+    };
+    detail();
+  }, [query, anime]);
 
   const renderList =
-    animes &&
-    animes.map((anime) => {
+    anime.length > 0 &&
+    anime.map((anime) => {
       const { image_url, mal_id, title } = anime;
       return (
         <div className="a-l_container" key={mal_id}>
@@ -49,7 +56,7 @@ const SearchResult = () => {
     });
   return (
     <>
-      <div className="para-r">Showing Results for {animeName}</div>
+      <div className="para-r">Showing Results for {query}</div>
       <div className="anime">{renderList}</div>
     </>
   );

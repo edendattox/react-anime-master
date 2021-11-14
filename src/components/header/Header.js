@@ -6,35 +6,26 @@ import ShuffleIcon from "@material-ui/icons/Shuffle";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory, useParams } from "react-router-dom";
 import {
-  // removeSelectedAnime,
+  removeSelectedAnime,
   fetchAnime,
   animeName,
 } from "../../redux/actions/animeAction";
 
 export const HeaderProvider = () => {
-  // const query = useSelector((state) => state.allAnime.animeName);
+  // const newQuery = useSelector((state) => state.allAnime.animeName);
   const dispatch = useDispatch();
   const history = useHistory();
   const [query, setQuery] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage, setPostsPerPage] = useState(20);
 
   const handleSearch = (e) => {
     e.preventDefault();
 
-    // fetchAnime(query, currentPage, postsPerPage);
-    history.push("/search?q=" + query);
-
-    // setQuery("");
+    history.push(`/search?q=${query}`);
   };
 
   useEffect(() => {
-    if (!query.length == "") {
-      dispatch(animeName(query));
-    }
-    if (!query.length == "" && query == query) {
-      dispatch(fetchAnime(query, currentPage, postsPerPage));
-    }
+    dispatch(fetchAnime(query));
+    dispatch(animeName(query));
   }, [query]);
 
   return (

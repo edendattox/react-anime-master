@@ -1,28 +1,39 @@
 import axios from "axios";
 import { ActionTypes } from "../contants/action-types";
 
-export function fetchAnime(query, currentPage, postsPerPage) {
+export function fetchAnime(query) {
   return async (dispatch) => {
-    const response = await axios.get(
-      `https://api.jikan.moe/v3/search/anime?q=${query}&order_by=title&sort=asc&limit=${postsPerPage}&page=${currentPage}`
-    );
-    dispatch({
-      type: ActionTypes.FETCH_ANIME,
-      payload: response.data,
-    });
+    let response;
+    try {
+      response = await axios.get(
+        `https://api.jikan.moe/v3/search/anime?q=${query}&order_by=title&sort=asc&limit=${20}&page=${1}`
+      );
+      dispatch({
+        type: ActionTypes.FETCH_ANIME,
+        payload: response.data,
+      });
+    } catch (err) {
+      console.error(err.message);
+    }
   };
 }
 
 export function fetchAnimes(query, id) {
   return async (dispatch) => {
-    console.log(query);
-    const response = await axios.get(
-      `https://api.jikan.moe/v3/search/anime?q=${query}&mal_id=${id}&limit=1`
-    );
-    dispatch({
-      type: ActionTypes.SELECTED_ANIME,
-      payload: response.data,
-    });
+    let response;
+    try {
+      if (query) {
+        response = await axios.get(
+          `https://api.jikan.moe/v3/search/anime?q=${query}&mal_id=${id}&limit=1`
+        );
+        dispatch({
+          type: ActionTypes.SELECTED_ANIME,
+          payload: response.data,
+        });
+      }
+    } catch (err) {
+      console.error(err.message);
+    }
   };
 }
 
@@ -33,32 +44,35 @@ export const setAnime = (anime) => {
   };
 };
 
-export const animeName = (animeN) => {
+export const animeName = (anime, id) => {
   return {
     type: ActionTypes.ANIME_NAME,
-    payload: animeN,
+    payload: {
+      anime,
+      id,
+    },
   };
 };
 
-export const animeDetailName = (animeDN) => {
-  console.log(animeDN);
+export const animeDetailName = (anime) => {
+  console.log(anime);
   return {
     type: ActionTypes.ANIME_DETAIL_NAME,
-    payload: animeDN,
+    payload: anime,
   };
 };
 
-export const idAnime = (animeID) => {
-  console.log(animeID);
+export const idAnime = (anime) => {
+  console.log(anime);
   return {
     type: ActionTypes.ID_ANIME,
-    payload: animeID,
+    payload: anime,
   };
 };
 
-export const removeSelectedAnime = (animes) => {
+export const removeSelectedAnime = () => {
   return {
     type: ActionTypes.REMOVE_SELECTED_ANIME,
-    payload: animes,
+    payload: {},
   };
 };

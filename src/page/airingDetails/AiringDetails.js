@@ -9,31 +9,25 @@ import {
 
 const AnimeDetails = () => {
   // const animeName = useSelector((state) => state.allAnime.animeName);
-  const dispatch = useDispatch();
-  const [query, setQuery] = useState("");
-  const [id, setId] = useState();
-  const animeDetail = useSelector((state) => state.allAnime.anime.results[0]);
+  // const dispatch = useDispatch();
+  // const [query, setQuery] = useState("");
+  // const [id, setId] = useState();
+  const animeDetail = useSelector(
+    (state) => state?.allAnime?.anime?.results[0]
+  );
 
-  const getParameters = (n) => {
-    let params = new URLSearchParams(window.location.search);
-    return params.get(n);
-  };
-  let name = getParameters("title");
-  let aid = getParameters("id");
+  // const getParameters = (n) => {
+  //   let params = new URLSearchParams(window.location.search);
+  //   return params.get(n);
+  // };
+  // let name = getParameters("title");
+  // let aid = getParameters("id");
 
-  console.log("query:", query, "Id:", id);
-
-  useEffect(() => {
-    setQuery(name);
-
-    setId(aid);
-
-    dispatch(fetchAnimes(query, id));
-
-    return () => {
-      dispatch(removeSelectedAnime(animeDetail));
-    };
-  }, [query, id, name, aid, dispatch, animeDetail]);
+  // useEffect(() => {
+  //   setQuery(name);
+  //   setId(aid);
+  //   dispatch(fetchAnimes(query, id));
+  // }, [query, id]);
 
   const { image_url, title, synopsis, mal_id, type, score, episodes, rated } =
     animeDetail;

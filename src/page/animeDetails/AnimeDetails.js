@@ -1,22 +1,11 @@
 import React, { useState, useEffect } from "react";
 import DetailsCard from "../../components/detailCard/DetailsCard";
-import { useDispatch, useSelector } from "react-redux";
-// import { useParams } from "react-router-dom";
-// import queryString from "query-string";
 import "./animeDetails.css";
-import {
-  fetchAnimes,
-  // eslint-disable-next-line no-unused-vars
-  removeSelectedAnime,
-} from "../../redux/actions/animeAction";
+import axios from "axios";
 
 const AnimeDetails = () => {
-  // const animeName = useSelector((state) => state.allAnime.animeName);
-  const dispatch = useDispatch();
-  const animeDetail = useSelector(
-    (state) => state?.allAnime?.anime?.results[0]
-  );
   const [query, setQuery] = useState("");
+  const [anime, setAnime] = useState([]);
   const [id, setId] = useState(0);
 
   const getParameters = (n) => {
@@ -25,21 +14,24 @@ const AnimeDetails = () => {
   };
   let name = getParameters("title");
   let aid = getParameters("id");
-  console.log(name);
-  console.log(id);
 
   useEffect(() => {
-    setQuery(name);
-    setId(aid);
-    dispatch(fetchAnimes(query, id));
-    // return () => {
-    //   dispatch(removeSelectedAnime(animeDetail));
-    // };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [query, name, aid, id, animeDetail]);
+    if (name && aid) {
+      setQuery(name);
+      setId(aid);
+    }
+    const detail = async () => {
+      const response = await axios.get(
+        `https://api.jikan.moe/v3/search/anime?q=${query}&mal_id=${id}&limit=1`
+      );
+      const results = response.data.results[0];
+      setAnime(results);
+    };
+    detail();
+  }, [query, id, anime]);
 
   const { image_url, title, synopsis, mal_id, type, score, episodes, rated } =
-    animeDetail;
+    anime;
 
   return (
     <div>

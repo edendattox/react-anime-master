@@ -1,4 +1,5 @@
-import React, { useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { useDispatch } from "react-redux";
 import "./Home.css";
 import CardFront from "../cardFront/CardFront";
 import { AnimeAiringContext } from "../../context/AiringContext";
@@ -8,8 +9,8 @@ import { Link } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 
 function Home() {
-  const [airing, setAiring] = useContext(AnimeAiringContext);
-  const [popular, setPopular] = useContext(AnimePopularContext);
+  const [airing] = useContext(AnimeAiringContext);
+  const [popular] = useContext(AnimePopularContext);
 
   return (
     <div className="home">
@@ -18,19 +19,20 @@ function Home() {
       </div>
 
       <div className="home__anime">
-        {airing.map((anime) => (
-          <div key={anime.mal_id}>
-            <Link to={"/airing?title=" + `${anime.title}&id=${anime.mal_id}`}>
-              <CardFront
-                className="cardFront__style"
-                key={anime.mal_id}
-                title={anime.title}
-                img={anime.image_url}
-                episode={anime.episodes}
-              />
-            </Link>
-          </div>
-        ))}
+        {airing.length > 0 &&
+          airing.map((anime) => (
+            <div key={anime.mal_id}>
+              <Link to={`/airing?title=${anime.title}&id=${anime.mal_id}`}>
+                <CardFront
+                  className="cardFront__style"
+                  key={anime.mal_id}
+                  title={anime.title}
+                  img={anime.image_url}
+                  episode={anime.episodes}
+                />
+              </Link>
+            </div>
+          ))}
       </div>
 
       <div className="home__title__two">
@@ -38,19 +40,22 @@ function Home() {
       </div>
 
       <div className="home__anime">
-        {popular.map((anime) => (
-          <div key={anime.mal_id}>
-            <Link to={"/popular?title=" + `${anime.title}&id=${anime.mal_id}`}>
-              <CardFront
-                className="cardFront__style"
-                key={anime.mal_id}
-                title={anime.title}
-                img={anime.image_url}
-                episode={anime.episodes}
-              />
-            </Link>
-          </div>
-        ))}
+        {popular.length > 0 &&
+          popular.map((anime) => (
+            <div key={anime.mal_id}>
+              <Link
+                to={`/popular?title=${`${anime.title}&id=${anime.mal_id}`}`}
+              >
+                <CardFront
+                  className="cardFront__style"
+                  key={anime.mal_id}
+                  title={anime.title}
+                  img={anime.image_url}
+                  episode={anime.episodes}
+                />
+              </Link>
+            </div>
+          ))}
 
         <div className="middle__container">
           <div className="donate">
