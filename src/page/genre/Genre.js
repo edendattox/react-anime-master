@@ -1,11 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const Genre = () => {
-    return (
-        <div className="Genre">
-            
-        </div>
-    )
-}
+  return <div className="Genre">Yo what's up</div>;
+};
 
-export default Genre
+export default Genre;

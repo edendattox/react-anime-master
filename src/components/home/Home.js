@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
-import { useDispatch } from "react-redux";
+import React, { useContext } from "react";
 import "./Home.css";
 import CardFront from "../cardFront/CardFront";
 import { AnimeAiringContext } from "../../context/AiringContext";
@@ -22,7 +21,7 @@ function Home() {
         {airing.length > 0 &&
           airing.map((anime) => (
             <div key={anime.mal_id}>
-              <Link to={`/airing?title=${anime.title}&id=${anime.mal_id}`}>
+              <Link to={`/detail?title=${anime.title}&id=${anime.mal_id}`}>
                 <CardFront
                   className="cardFront__style"
                   key={anime.mal_id}
@@ -43,9 +42,7 @@ function Home() {
         {popular.length > 0 &&
           popular.map((anime) => (
             <div key={anime.mal_id}>
-              <Link
-                to={`/popular?title=${`${anime.title}&id=${anime.mal_id}`}`}
-              >
+              <Link to={`/detail?title=${`${anime.title}&id=${anime.mal_id}`}`}>
                 <CardFront
                   className="cardFront__style"
                   key={anime.mal_id}

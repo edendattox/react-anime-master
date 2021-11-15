@@ -17,16 +17,9 @@ const AnimeDetails = () => {
     return num;
   };
 
-  // console.log(query);
-  // console.log(id);
-
   useEffect(() => {
-    // setQuery(name);
     setId(random());
     dispatch(fetchAnimes(query, id));
-    // return () => {
-    //   // dispatch(removeSelectedAnime());
-    // };
   }, [query]);
   return (
     <div>

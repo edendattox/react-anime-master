@@ -3,30 +3,25 @@ import "./Header.css";
 import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
 import ShuffleIcon from "@material-ui/icons/Shuffle";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useHistory, useParams } from "react-router-dom";
-import {
-  removeSelectedAnime,
-  fetchAnime,
-  animeName,
-} from "../../redux/actions/animeAction";
+import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { fetchAnime, animeName } from "../../redux/actions/animeAction";
 
 export const HeaderProvider = () => {
-  // const newQuery = useSelector((state) => state.allAnime.animeName);
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
   const [query, setQuery] = useState("");
 
   const handleSearch = (e) => {
     e.preventDefault();
 
-    history.push(`/search?q=${query}`);
+    navigate(`/search?q=${query}`);
   };
 
   useEffect(() => {
     dispatch(fetchAnime(query));
     dispatch(animeName(query));
-  }, [query]);
+  }, [query, dispatch]);
 
   return (
     <div className="header">

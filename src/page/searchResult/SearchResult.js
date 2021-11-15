@@ -1,15 +1,8 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-import SearchCard from "../../components/cardFront/CardFront";
-import "./SearchResult.css";
-// import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-// import { idAnime } from "../../redux/actions/animeAction";
-// import {
-//   animeDetailName,
-//   fetchAnimes,
-//   fetchAnime,
-// } from "../../redux/actions/animeAction";
+import SearchCard from "../../components/cardFront/CardFront";
+import useFetch from "../../customHooks/useFetch";
+import "./SearchResult.css";
 
 const SearchResult = () => {
   const [query, setQuery] = useState("");
@@ -21,19 +14,26 @@ const SearchResult = () => {
   };
   let name = getParameters("q");
 
-  console.log(name);
+  const URL = `https://api.jikan.moe/v3/search/anime?q=${query}&order_by=title&sort=asc&limit=${20}&page=${1}`;
+
+  const { loading, error, data } = useFetch(URL);
 
   useEffect(() => {
-    setQuery(name);
-    const detail = async () => {
-      const response = await axios.get(
-        `https://api.jikan.moe/v3/search/anime?q=${query}&order_by=title&sort=asc&limit=${20}&page=${1}`
-      );
-      const results = response.data.results[0];
-      setAnime(results);
-    };
-    detail();
-  }, [query, anime]);
+    if (name) {
+      setQuery(name);
+    }
+
+    if (data) {
+      setAnime(data.results);
+    }
+  }, [data, name]);
+
+  if (loading) {
+    return <div>Loading....</div>;
+  }
+  if (error) {
+    return <div>{error}</div>;
+  }
 
   const renderList =
     anime.length > 0 &&
