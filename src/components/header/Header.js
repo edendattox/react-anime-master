@@ -29,7 +29,7 @@ export const HeaderProvider = () => {
         <Link to="/">
           <img
             className="logo"
-            src="https://4anime.to/static/logo.png"
+            src="https://4anime.city/wp-content/themes/4anime_city/assets/img/logo_front_page.png?v=12"
             alt="logo"
             height="54px"
             width="50px"

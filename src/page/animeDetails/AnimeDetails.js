@@ -45,7 +45,7 @@ const AnimeDetails = () => {
       <div className="a-container">
         <div className="cover">
           <img
-            src="https://4anime.to/static/Dr1FzAv.jpg"
+            src="https://mcdn.wallpapersafari.com/medium/99/21/kKEU2A.jpg"
             alt="background"
             className="bg"
           />
