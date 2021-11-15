@@ -1,9 +1,7 @@
-import React from "react";
+import React, { Fragment } from "react";
 import "./App.css";
-
 import Home from "./components/home/Home";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-// import SingleView from "./page/SingleView";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { AiringProvider } from "./context/AiringContext";
 import { PopularProvider } from "./context/Popular";
 import { BrowseProvider } from "./context/BrowseAnime";
@@ -12,9 +10,7 @@ import Header from "./components/header/Header";
 import Random from "./page/random/random";
 import SearchResult from "./page/searchResult/SearchResult";
 import AnimeDetails from "./page/animeDetails/AnimeDetails";
-import BrowseDetail from "./page/browseDetail/BrowseDetail";
-import AiringDetails from "./page/airingDetails/AiringDetails";
-import PopularDetail from "./page/popularDetail/PopularDetail";
+import Genre from "./page/genre/Genre";
 
 function App() {
   return (
@@ -23,36 +19,18 @@ function App() {
         <BrowseProvider>
           <div className="App">
             <Router>
-              <Header />
-              <Switch>
-                <Route path="/" exact>
-                  <Home />
-                </Route>
-
-                <Route path="/browse">
-                  <Browse />
-                </Route>
-
-                <Route path="/random" exact>
-                  <Random />
-                </Route>
-                <Route path="/search" exact>
-                  <SearchResult />
-                </Route>
-                <Route path="/detail" exact>
-                  <AnimeDetails />
-                </Route>
-                <Route path="/title" exact>
-                  <BrowseDetail />
-                </Route>
-                <Route path="/airing" exact>
-                  <AiringDetails />
-                </Route>
-                <Route path="/popular" exact>
-                  <PopularDetail />
-                </Route>
-                <Route>404 Go Back</Route>
-              </Switch>
+              <Fragment>
+                <Header />
+                <Routes>
+                  <Route exact path="/" element={<Home />} />
+                  <Route exact path="/browse" element={<Browse />} />
+                  <Route exact path="/random" element={<Random />} />
+                  <Route exact path="/genre" element={<Genre />} />
+                  <Route exact path="/search" element={<SearchResult />} />
+                  <Route exact path="/detail" element={<AnimeDetails />} />
+                  <Route>404 Go Back</Route>
+                </Routes>
+              </Fragment>
             </Router>
           </div>
         </BrowseProvider>
