@@ -18,6 +18,10 @@ export const HeaderProvider = () => {
     navigate(`/search?q=${query}`);
   };
 
+  const handleChange = (e) => {
+    setQuery(e.target.value);
+  };
+
   useEffect(() => {
     dispatch(fetchAnime(query));
     dispatch(animeName(query));
@@ -53,7 +57,7 @@ export const HeaderProvider = () => {
             type="search"
             placeholder="Search..."
             value={query}
-            onChange={(e) => setQuery(e.target.value)}
+            onChange={handleChange}
             required
             style={{
               backgroundColor: "#161616",

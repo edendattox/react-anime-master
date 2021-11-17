@@ -30,7 +30,7 @@ const SearchResult = () => {
     let params = new URLSearchParams(window.location.search);
     return params.get(n);
   };
-  let name = getParameters("q");
+  const name = getParameters("q");
 
   const URL = `https://api.jikan.moe/v3/search/anime?q=${query}&order_by=title&sort=asc&limit=${20}&page=${1}`;
 
@@ -48,7 +48,7 @@ const SearchResult = () => {
     if (data) {
       setAnime(data.results);
     }
-  }, [data, query, debouncedSearchTerm]);
+  }, [data, query, debouncedSearchTerm, animeName, name]);
 
   if (loading) {
     return (
