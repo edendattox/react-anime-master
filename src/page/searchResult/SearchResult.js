@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import SearchCard from "../../components/cardFront/CardFront";
-import useFetch from "../../customHooks/useFetch";
 import "./SearchResult.css";
+import useFetch from "../../customHooks/useFetch";
+import { useSelector } from "react-redux";
+import useDebounce from "../../customHooks/useDebounce";
 
 const SearchResult = () => {
+  const animeName = useSelector((anime) => anime.allAnime.animeName.anime);
   const [query, setQuery] = useState("");
   const [anime, setAnime] = useState([]);
 
@@ -16,17 +19,23 @@ const SearchResult = () => {
 
   const URL = `https://api.jikan.moe/v3/search/anime?q=${query}&order_by=title&sort=asc&limit=${20}&page=${1}`;
 
+  const debouncedSearchTerm = useDebounce(animeName, 700);
+
   const { loading, error, data } = useFetch(URL);
 
   useEffect(() => {
-    if (name) {
-      setQuery(name);
+    if (debouncedSearchTerm) {
+      setQuery(debouncedSearchTerm);
     }
 
     if (data) {
       setAnime(data.results);
     }
-  }, [data, name]);
+
+    return () => {
+      setQuery("");
+    };
+  }, [data, query, debouncedSearchTerm]);
 
   if (loading) {
     return <div>Loading....</div>;

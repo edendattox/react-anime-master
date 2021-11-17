@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import DetailsCard from "../../components/detailCard/DetailsCard";
-import "./animeDetails.css";
+import DetailPage from "../../components/detailPage/DetailsPage";
 import useFetch from "../../customHooks/useFetch";
+import "./animeDetails.css";
 
 const AnimeDetails = () => {
   const [query, setQuery] = useState("");
@@ -34,7 +34,14 @@ const AnimeDetails = () => {
     return <div>Loading....</div>;
   }
   if (error) {
-    return <div>{error}</div>;
+    return (
+      <div className="error">
+        <h1>
+          {`Sorry, Not found Anime with keyword ${query}. You can find all anime
+          at`}
+        </h1>
+      </div>
+    );
   }
 
   const { image_url, title, synopsis, mal_id, type, score, episodes, rated } =
@@ -52,7 +59,7 @@ const AnimeDetails = () => {
         </div>
 
         <div className="s-list">
-          <DetailsCard
+          <DetailPage
             className="SearchCard__style"
             key={mal_id}
             title={title}

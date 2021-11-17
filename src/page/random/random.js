@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import DetailsCard from "../../components/detailCard/DetailsCard";
+import DetailsPage from "../../components/detailPage/DetailsPage";
 import { useDispatch, useSelector } from "react-redux";
 import "./random.css";
-import { fetchAnimes } from "../../redux/actions/animeAction";
+// import { fetchAnimes } from "../../redux/actions/animeAction";
 
 const AnimeDetails = () => {
   const dispatch = useDispatch();
@@ -19,7 +19,7 @@ const AnimeDetails = () => {
 
   useEffect(() => {
     setId(random());
-    dispatch(fetchAnimes(query, id));
+    // dispatch(fetchAnimes(query, id));
   }, [query]);
   return (
     <div>
@@ -33,7 +33,7 @@ const AnimeDetails = () => {
         </div>
 
         <div className="s-list">
-          <DetailsCard
+          <DetailsPage
             className="SearchCard__style"
             key={mal_id}
             title={title}

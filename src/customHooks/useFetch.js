@@ -39,7 +39,7 @@ const useFetch = (url = "", options = null) => {
 
     return () => {
       isMounted = false;
-      abortController.abort();
+      // abortController.abort();
     };
   }, [url, options]);
 
