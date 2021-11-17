@@ -1,12 +1,28 @@
 import React, { useState, useEffect } from "react";
 import DetailPage from "../../components/detailPage/DetailsPage";
 import useFetch from "../../customHooks/useFetch";
+import PuffLoader from "react-spinners/PuffLoader";
+import { css } from "@emotion/react";
 import "./animeDetails.css";
+
+const spinner = {
+  height: "100%",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+};
+
+const override = css`
+  display: block;
+  margin: 0 auto;
+  border-color: red;
+`;
 
 const AnimeDetails = () => {
   const [query, setQuery] = useState("");
   const [anime, setAnime] = useState([]);
   const [id, setId] = useState(0);
+  const [color, setColor] = useState("#36D7B7");
 
   const getParameters = (n) => {
     let params = new URLSearchParams(window.location.search);
@@ -17,7 +33,7 @@ const AnimeDetails = () => {
 
   const URL = `https://api.jikan.moe/v3/search/anime?q=${query}&mal_id=${id}&limit=1`;
 
-  const { loading, error, data } = useFetch(URL);
+  const { loading = true, error, data } = useFetch(URL);
 
   useEffect(() => {
     if (name && aid) {
@@ -28,12 +44,16 @@ const AnimeDetails = () => {
     if (data) {
       setAnime(data.results[0]);
     }
-  }, [aid, data, name, id]);
+  }, [aid, data, name]);
 
   if (loading) {
-    return <div>Loading....</div>;
+    return (
+      <div style={spinner}>
+        <PuffLoader color={color} loading={loading} css={override} size={160} />
+      </div>
+    );
   }
-  if (error) {
+  if (error && !anime) {
     return (
       <div className="error">
         <h1>
