@@ -34,9 +34,7 @@ const SearchResult = () => {
 
   const URL = `https://api.jikan.moe/v3/search/anime?q=${query}&order_by=title&sort=asc&limit=${20}&page=${1}`;
 
-  const title = animeName === "" ? name : animeName;
-
-  const debouncedSearchTerm = useDebounce(title, 500);
+  const debouncedSearchTerm = useDebounce(animeName, 500);
 
   const { loading, error, data } = useFetch(URL);
 
@@ -48,6 +46,10 @@ const SearchResult = () => {
     if (data) {
       setAnime(data.results);
     }
+
+    return () => {
+      setQuery(name);
+    };
   }, [data, query, debouncedSearchTerm, animeName, name]);
 
   if (loading) {
@@ -58,7 +60,14 @@ const SearchResult = () => {
     );
   }
   if (error) {
-    return <div>{error}</div>;
+    return (
+      <div>
+        <h1 style={{ color: "white" }}>
+          {`Sorry, Not found Anime with keyword ${query}. You can find all anime
+    at`}
+        </h1>
+      </div>
+    );
   }
 
   const renderList =

@@ -10,10 +10,6 @@ const useDetail = ({ name, aid = null }) => {
 
   const { loading, error, data } = useFetch(URL);
 
-  console.log(name);
-
-  console.log(anime);
-
   useEffect(() => {
     if (name && aid) {
       setQuery(name);
