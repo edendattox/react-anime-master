@@ -34,9 +34,12 @@ const SearchResult = () => {
 
   const URL = `https://api.jikan.moe/v3/search/anime?q=${query}&order_by=title&sort=asc&limit=${20}&page=${1}`;
 
-  const debouncedSearchTerm = useDebounce(animeName, 500);
+  const debouncedSearchTerm = useDebounce(animeName, 600);
 
   const { loading, error, data } = useFetch(URL);
+
+  console.log(debouncedSearchTerm);
+  console.log(data);
 
   useEffect(() => {
     if (debouncedSearchTerm) {
