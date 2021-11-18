@@ -11,6 +11,11 @@ export const HeaderProvider = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [query, setQuery] = useState("");
+  const [toggle, setToggle] = useState(false);
+
+  const triggerToggle = () => {
+    setToggle(!toggle);
+  };
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -52,24 +57,25 @@ export const HeaderProvider = () => {
       </div>
 
       <div className="header__right">
-        <form className="search-box" onSubmit={handleSearch}>
-          <input
-            type="search"
-            placeholder="Search..."
-            value={query}
-            onChange={handleChange}
-            required
-            style={{
-              backgroundColor: "#161616",
-              padding: "15px",
-              border: "1px solid #b6b6b6",
-              width: "400px",
-              borderRadius: ".5em",
-              color: "#b6b6b6",
-            }}
-          />
-        </form>
-
+        {!toggle && (
+          <form className="search-box" onSubmit={handleSearch}>
+            <input
+              type="search"
+              placeholder="Search..."
+              value={query}
+              onChange={handleChange}
+              required
+              style={{
+                backgroundColor: "#161616",
+                padding: "15px",
+                border: "1px solid #b6b6b6",
+                width: "400px",
+                borderRadius: ".5em",
+                color: "#b6b6b6",
+              }}
+            />
+          </form>
+        )}
         <span>
           <i
             className="fab fa-discord"
@@ -89,7 +95,7 @@ export const HeaderProvider = () => {
 
       <div className="header__burger">
         <ShuffleIcon className="icon" />
-        <SearchIcon className="icon" />
+        <SearchIcon onClick={triggerToggle} className="icon" />
         <MenuIcon className="icon" />
       </div>
     </div>
