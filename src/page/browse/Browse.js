@@ -11,7 +11,7 @@ function Browse() {
     const { image_url, mal_id, title } = anime;
     return (
       <div className="b-container" key={mal_id}>
-        <Link to={`/airing?title=${anime.title}&id=${anime.mal_id}`}>
+        <Link to={`/detail?title=${anime.title}&id=${anime.mal_id}`}>
           <div className="b-anime">
             <CardFront
               className="SearchCard__style"
