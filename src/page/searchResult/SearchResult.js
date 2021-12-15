@@ -26,20 +26,17 @@ const SearchResult = () => {
   const [anime, setAnime] = useState([]);
   const [color, setColor] = useState("#36D7B7");
 
-  // const getParameters = (n) => {
-  //   let params = new URLSearchParams(window.location.search);
-  //   return params.get(n);
-  // };
-  // const name = getParameters("q");
+  const getParameters = (n) => {
+    let params = new URLSearchParams(window.location.search);
+    return params.get(n);
+  };
+  const name = getParameters("q");
 
   const URL = `https://api.jikan.moe/v3/search/anime?q=${query}&order_by=title&sort=asc&limit=${20}&page=${1}`;
 
   const debouncedSearchTerm = useDebounce(animeName, 800);
 
   const { loading, error, data } = useFetch(URL);
-
-  console.log(debouncedSearchTerm);
-  console.log(data);
 
   useEffect(() => {
     if (debouncedSearchTerm) {
@@ -53,7 +50,7 @@ const SearchResult = () => {
     // return () => {
     //   setAnime(null);
     // };
-  }, [data, query, debouncedSearchTerm]);
+  }, [data, debouncedSearchTerm, name]);
 
   if (loading) {
     return (
