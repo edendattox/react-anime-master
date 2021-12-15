@@ -26,11 +26,11 @@ const SearchResult = () => {
   const [anime, setAnime] = useState([]);
   const [color, setColor] = useState("#36D7B7");
 
-  const getParameters = (n) => {
-    let params = new URLSearchParams(window.location.search);
-    return params.get(n);
-  };
-  const name = getParameters("q");
+  // const getParameters = (n) => {
+  //   let params = new URLSearchParams(window.location.search);
+  //   return params.get(n);
+  // };
+  // const name = getParameters("q");
 
   const URL = `https://api.jikan.moe/v3/search/anime?q=${query}&order_by=title&sort=asc&limit=${20}&page=${1}`;
 
@@ -50,12 +50,10 @@ const SearchResult = () => {
       setAnime(data.results);
     }
 
-    setQuery(name);
-
-    return () => {
-      setAnime(null);
-    };
-  }, [data, query, debouncedSearchTerm, animeName, name]);
+    // return () => {
+    //   setAnime(null);
+    // };
+  }, [data, query, debouncedSearchTerm]);
 
   if (loading) {
     return (
