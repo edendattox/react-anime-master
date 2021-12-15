@@ -53,7 +53,7 @@ export const HeaderProvider = () => {
           <span>Random</span>
         </Link>
 
-        <span>Genre</span>
+        {/* <span>Genre</span> */}
       </div>
 
       <div className="header__right">
