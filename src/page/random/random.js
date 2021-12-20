@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import DetailsPage from "../../components/detailPage/DetailsPage";
-import { useDispatch } from "react-redux";
 import "./random.css";
 
 const AnimeDetails = () => {

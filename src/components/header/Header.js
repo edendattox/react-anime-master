@@ -3,15 +3,19 @@ import "./Header.css";
 import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
 import ShuffleIcon from "@material-ui/icons/Shuffle";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { fetchAnime, animeName } from "../../redux/actions/animeAction";
+import { logout, selectUser } from "../../features/userSlice";
+import { anime } from "../../features/animeSlice";
+import { auth } from "../../firebase/firebase";
 
 export const HeaderProvider = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const [query, setQuery] = useState("");
   const [toggle, setToggle] = useState(false);
+
+  const navigate = useNavigate();
+  const user = useSelector((user) => user.users.user);
 
   const triggerToggle = () => {
     setToggle(!toggle);
@@ -27,9 +31,22 @@ export const HeaderProvider = () => {
     setQuery(e.target.value);
   };
 
+  const logoutOfApp = () => {
+    auth
+      .signOut()
+      .then(() => {
+        dispatch(logout());
+        navigate("/login");
+      })
+      .catch((error) => console.error(error.message));
+  };
+
   useEffect(() => {
-    dispatch(fetchAnime(query));
-    dispatch(animeName(query));
+    dispatch(
+      anime({
+        name: query,
+      })
+    );
   }, [query, dispatch]);
 
   return (
@@ -90,7 +107,28 @@ export const HeaderProvider = () => {
             style={{ fontSize: "20px", color: "#b6b6b6" }}
           ></i>
         </span>
-        <p>Login</p>
+        {user ? (
+          <Link
+            to=""
+            id="logout"
+            onClick={logoutOfApp}
+            style={{ textDecoration: "none" }}
+          >
+            <p
+              style={{ color: "#b6b6b6", fontSize: "14px", marginLeft: "5px" }}
+            >
+              LogOut
+            </p>
+          </Link>
+        ) : (
+          <Link to="/login" id="login" style={{ textDecoration: "none" }}>
+            <p
+              style={{ color: "#b6b6b6", fontSize: "14px", marginLeft: "5px" }}
+            >
+              Login
+            </p>
+          </Link>
+        )}
       </div>
 
       <div className="header__burger">

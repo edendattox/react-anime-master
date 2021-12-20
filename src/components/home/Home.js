@@ -67,7 +67,9 @@ function Home() {
             <div className="donate__button__text">
               <h3>The donation amount is manually updated every few days.</h3>
             </div>
-            <Button className="button">DONATE</Button>
+            <Button className="button" style={{ marginRight: "25px" }}>
+              DONATE
+            </Button>
           </div>
 
           <div className="bar" style={{ cursor: "pointer" }}>

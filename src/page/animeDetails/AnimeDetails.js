@@ -22,7 +22,7 @@ const AnimeDetails = () => {
   const [query, setQuery] = useState("");
   const [anime, setAnime] = useState([]);
   const [id, setId] = useState(0);
-  const [color, setColor] = useState("#36D7B7");
+  const [color] = useState("#36D7B7");
 
   const getParameters = (n) => {
     let params = new URLSearchParams(window.location.search);

@@ -21,10 +21,11 @@ const override = css`
 `;
 
 const SearchResult = () => {
-  const animeName = useSelector((anime) => anime.allAnime.animeName.anime);
+  const animeName = useSelector((anime) => anime.animes.name.name);
+
   const [query, setQuery] = useState("");
   const [anime, setAnime] = useState([]);
-  const [color, setColor] = useState("#36D7B7");
+  const [color] = useState("#36D7B7");
 
   const getParameters = (n) => {
     let params = new URLSearchParams(window.location.search);
